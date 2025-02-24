@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import TokenContextProvider from "./Context/Token";
+import UserContextProvider from "./Context/User";
 
 const App = () => {
   return (
@@ -20,8 +21,12 @@ const App = () => {
           <Route path="/register" element={<Register />} />
 
           <Route path="/loading" element={<Loading />} />
-
-          <Route path="/dashboard" element={<Dashboard />} />
+          
+          <Route path="/dashboard" element={
+            <UserContextProvider>
+              <Dashboard />
+            </UserContextProvider>
+          } />
 
           <Route path="*" element={<NotFound/>} />
         </Routes>

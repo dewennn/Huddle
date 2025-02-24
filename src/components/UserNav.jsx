@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../Context/User'
 
-const UserNav = ({profilePicture = 'default_profile_picture.png', username = 'dewen', status = 'Online'}) => {
+const UserNav = ({profilePicture = 'default_profile_picture.png', status = 'Online'}) => {
+  const {username} = useContext(UserContext)
+  console.log(username)
+
   return (
     <section className='absolute bottom-0 left-0 right-0 bg-4 flex items-center p-2'>
       <div className='w-full flex gap-2 items-center'>

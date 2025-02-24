@@ -3,9 +3,12 @@ import Sidebar from '../components/Sidebar'
 import { TokenContext } from '../Context/Token'
 import { serverAddress } from '../data'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../Context/User'
 
 const Dashboard = () => {
+  // Hooks
   const navigate = useNavigate()
+  const {username, setUsername} = useContext(UserContext)
 
   // JWT Token
   const { token } = useContext(TokenContext)
@@ -29,7 +32,7 @@ const Dashboard = () => {
       if(!response.ok) throw new Error("Failed to fetch user data")
       
       const data = await response.json()
-      console.log(data)
+      setUsername(data["username"])
     }
     catch (error) {
       console.error("Error fetching user data: ", error)

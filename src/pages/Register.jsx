@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { serverAddress } from '../data'
 import { useNavigate } from 'react-router-dom'
+import { TokenContext } from '../Context/Token'
 
 const Register = () => {
+  // JWT Token
+  const { setToken } = useContext(TokenContext)
+
   // Form handling
   const [formData, setFormData] = useState({
     email: "",
@@ -29,7 +33,7 @@ const Register = () => {
       if (!response.ok) throw new Error("Registration failed")
 
       const data = await response.json()
-      return data
+      setToken(data['token'])
     } catch (error) {
       throw error
     }
