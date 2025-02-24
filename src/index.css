@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+.bg-1{
+  background-color:#424943;
+}
+.bg-2{
+  background-color: #36393e;
+}
+.bg-3{
+  background-color:#282b30;
+}
+.bg-4{
+  background-color:#1e2124;
+}
+.bg-highlight{
+  background-color:#39a65f;
+}
+
+.text-1{
+  color:#424549;
+}
+.text-2{
+  color: #36393e;
+}
+.text-3{
+  color:#282b30;
+}
+.text-4{
+  color:#1e2124;
+}
+.text-highlight{
+  color:#7289da;
+}
+
+.manrope {
+  font-family: "Manrope", serif;
+}
+
+.space-mono {
+  font-family: "Space Mono", serif;
+}
