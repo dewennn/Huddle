@@ -1,1 +1,1 @@
-export const serverAddress = 'https://localhost:7006'
+export const serverAddress = 'http://localhost:5166'

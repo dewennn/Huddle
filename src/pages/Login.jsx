@@ -4,8 +4,6 @@ import { serverAddress } from '../data'
 import { TokenContext } from '../Context/Token'
 
 const Login = () => {
-  // JWT Token
-  const {token, setToken} = useContext(TokenContext)
 
   // Navigate
   const navigate = useNavigate()
@@ -27,13 +25,13 @@ const Login = () => {
         headers: {
           "Content-Type" : "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        credentials: "include"
       })
 
       if (!response.ok) throw new Error("Problem with Login")
 
       const data = await response.json()
-      setToken(data['token'])
     } catch (error) {
       throw error
     }

@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { TokenContext } from '../Context/Token'
 
 const Register = () => {
-  // JWT Token
-  const { setToken } = useContext(TokenContext)
 
   // Form handling
   const [formData, setFormData] = useState({
@@ -27,13 +25,13 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        credentials: "include"
       })
 
       if (!response.ok) throw new Error("Registration failed")
 
       const data = await response.json()
-      setToken(data['token'])
     } catch (error) {
       throw error
     }

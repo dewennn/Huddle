@@ -5,8 +5,6 @@ const InfobarDashboard = () => {
   return (
     <>
       <ConversationDashboard/>
-      
-      
     </>
   )
 }

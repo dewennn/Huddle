@@ -8,26 +8,18 @@ import { UserContext } from '../Context/User'
 const Dashboard = () => {
   // Hooks
   const navigate = useNavigate()
-  const {username, setUsername} = useContext(UserContext)
-
-  // JWT Token
-  const { token } = useContext(TokenContext)
+  const {setUsername} = useContext(UserContext)
 
   // Request user data
   const getUserData = async () => {
-    if(!token){
-      navigate('/login')
-      return
-    }
-
     try {
       const response = await fetch(serverAddress + '/api/user/me', {
         method: "GET",
+        credentials: "include",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization":`Bearer ${token}`
+          "Content-Type": "application/json"
         }
-      })
+      })  
 
       if(!response.ok) throw new Error("Failed to fetch user data")
       
@@ -41,7 +33,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getUserData()
-  }, [token])
+  }, [])
 
   // Component
   return (

@@ -3,7 +3,6 @@ import { UserContext } from '../Context/User'
 
 const UserNav = ({profilePicture = 'default_profile_picture.png', status = 'Online'}) => {
   const {username} = useContext(UserContext)
-  console.log(username)
 
   return (
     <section className='absolute bottom-0 left-0 right-0 bg-4 flex items-center p-2'>
