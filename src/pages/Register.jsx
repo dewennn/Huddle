@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { serverAddress } from '../data'
 import { useNavigate } from 'react-router-dom'
-import { TokenContext } from '../Context/Token'
 
 const Register = () => {
 
@@ -105,6 +104,7 @@ const Register = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className='bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full'
+                required
               />
             </div>
 
@@ -117,6 +117,7 @@ const Register = () => {
                 value={formData.displayName}
                 onChange={handleChange}
                 className="bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full"
+                required
               />
             </div>
 
@@ -129,6 +130,7 @@ const Register = () => {
                 value={formData.username}
                 onChange={handleChange}
                 className="bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full"
+                required
               />
             </div>
 
@@ -141,6 +143,7 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className="bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full"
+                required
               />
             </div>
 
@@ -153,6 +156,7 @@ const Register = () => {
                 value={formData.dateOfBirth}
                 onChange={handleChange}
                 className="bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full"
+                required
               />
             </div>
 

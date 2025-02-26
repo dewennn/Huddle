@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { act, useContext, useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
-import { TokenContext } from '../Context/Token'
 import { serverAddress } from '../data'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../Context/User'
+import AddFriend from '../components/dashboard/AddFriend'
 
 const Dashboard = () => {
   // Hooks
@@ -30,36 +30,73 @@ const Dashboard = () => {
       console.error("Error fetching user data: ", error)
     }
   }
-
   useEffect(() => {
     getUserData()
   }, [])
+
+  // Navigation
+  const[active, setActive] = useState('online')
 
   // Component
   return (
     <>
       <div className="flex manrope text-gray-200">
         <Sidebar />
+        
         <div className="w-full bg-2">
-            <header>
+          <header>
             {/* Left */} <div className='flex items-center gap-4 p-4 shadow-lg border-black h-16'>
               <h1 className='font-semibold px-4'>Friends</h1>
 
               <div className='h-5 w-[1px] bg-gray-400'></div>
 
-              <button className='hover:cursor-pointer font-semibold hover:bg-[#424549] px-4 py-2 rounded-lg'>Online</button>
+              <button
+                className={`font-semibold px-4 py-2 rounded-lg
+                ${active == 'online' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
+                onClick={() => setActive('online')}
+              >
+                Online
+              </button>
 
-              <button className='hover:cursor-pointer font-semibold hover:bg-[#424549] px-4 py-2 rounded-lg'>All</button>
+              <button
+                className={`font-semibold px-4 py-2 rounded-lg
+                ${active == 'all' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
+                onClick={() => setActive('all')}
+              >
+                All
+              </button>
 
-              <button className='hover:cursor-pointer font-semibold hover:bg-[#424549] px-4 py-2 rounded-lg'>Pending</button>
+              <button
+                className={`font-semibold px-4 py-2 rounded-lg
+                ${active == 'pending' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
+                onClick={() => setActive('pending')}
+              >
+                Pending
+              </button>
 
-              <button className='hover:cursor-pointer font-semibold px-4 py-2 rounded-lg bg-emerald-700'>Add Friend</button>
+              <button
+                className={`font-semibold px-4 py-2 rounded-lg
+                ${active == 'addFriend' ? 'text-emerald-400' : 'bg-emerald-700 hover:cursor-pointer'}`}
+                onClick={() => setActive('addFriend')}
+              >
+                Add Friend
+              </button>
             </div>
 
             {/* Right */} <div>
               
             </div>
           </header>
+
+          <main className='flex'>
+            <section className='w-full'>
+              {active == 'addFriend' ? <AddFriend/> : <></>}
+            </section>
+            
+            <section className='w-[500px] border-l border-gray-500 p-5' style={{height: 'calc(-64px + 100vh)'}}>
+              <h1 className='font-semibold text-lg'>Active Now</h1>
+            </section>
+          </main>
         </div>
       </div>
     </>

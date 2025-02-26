@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { serverAddress } from '../data'
-import { TokenContext } from '../Context/Token'
 
 const Login = () => {
 
@@ -100,6 +99,7 @@ const Login = () => {
                 type="email"
                 onChange={handleChange}
                 className='bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70'
+                required
               />
             </div>
 
@@ -111,8 +111,9 @@ const Login = () => {
                 type="password"
                 onChange={handleChange}
                 className='bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full'
+                required
               />
-              <button className='text-blue-300 hover:cursor-pointer hover:underline'>Forgot your password?</button>
+              <button className='text-blue-300 hover:cursor-pointer hover:underline' type='button'>Forgot your password?</button>
             </div>
 
             {/* Buttons */} <div className='flex flex-col gap-2 mt-5'>
