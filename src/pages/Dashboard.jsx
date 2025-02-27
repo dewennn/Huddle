@@ -4,6 +4,7 @@ import { serverAddress } from '../data'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../Context/User'
 import AddFriend from '../components/dashboard/AddFriend'
+import FetchFriendListProvider from '../Context/FetchFriendList'
 
 const Dashboard = () => {
   // Hooks
@@ -30,6 +31,7 @@ const Dashboard = () => {
       console.error("Error fetching user data: ", error)
     }
   }
+
   useEffect(() => {
     getUserData()
   }, [])
@@ -37,9 +39,9 @@ const Dashboard = () => {
   // Navigation
   const[active, setActive] = useState('online')
 
-  // Component
+  // COMPONENT
   return (
-    <>
+    <FetchFriendListProvider>
       <div className="flex manrope text-gray-200">
         <Sidebar />
         
@@ -99,7 +101,7 @@ const Dashboard = () => {
           </main>
         </div>
       </div>
-    </>
+    </FetchFriendListProvider>
   )
 }
 

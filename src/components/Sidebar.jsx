@@ -1,37 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import InfobarDashboard from './sidebar/dashboardPage/InfobarDashboard'
 import UserNav from './UserNav'
 import FriendChat from './sidebar/dashboardPage/FriendChat'
 import { serverAddress } from '../data'
+import { FetchFriendList } from '../Context/FetchFriendList'
 
 const Sidebar = () => {
-  const[friends, setFriends] = useState([])
+  // FETCH FRIEND LIST
+    const {friends, fetchFriends} = useContext(FetchFriendList)
 
-  const getFriends = async () => {
-    try {
-      const response = await fetch(serverAddress + '/api/user/friends', {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-
-      if(!response.ok) throw new Error("Failed to fetch user friends")
-
-      const data = await response.json()
-
-      setFriends(data)
-    } catch (error) {
-      console.error("Error fetching user data: ", error)
-    }
-  }
-
-  useEffect(() => {
-      getFriends()
-    }, [])
+    // call the fetch function
+    useEffect(() => {
+        fetchFriends()
+      }, [])
   
-  // Component
+
+  // COMPONENT
   return (
     <section className='flex'>
       <section className='w-16 h-screen bg-4 flex flex-col p-2'>

@@ -1,28 +1,35 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { serverAddress } from '../../data'
+import { FetchFriendList } from '../../Context/FetchFriendList'
 
 const AddFriend = () => {
-  const[targetUsername, setTargetUsername] = useState('')
+  // FORM HANDLER
+    const {fetchFriends} = useContext(FetchFriendList)
 
-  const handleChange = (e) => {
-    setTargetUsername(e.target.value)
-  }
+    // handle user form value and change
+      const[targetUsername, setTargetUsername] = useState('')
 
-  const addFriendHandler = async () => {
-    const data = await fetch(serverAddress + '/api/user/add_friend', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        "targetUsername":targetUsername
-      }),
-      credentials: "include"
-    })
+      const handleChange = (e) => {
+        setTargetUsername(e.target.value)
+      }
+    
+    // fetch function
+      const addFriendHandler = async () => {
+        const data = await fetch(serverAddress + '/api/user/add_friend', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "targetUsername":targetUsername
+          }),
+          credentials: "include"
+        })
 
-    console.log(data)
-  }
+        fetchFriends()
+      }
 
+  // COMPONENT
   return (
     <div className='p-5'>
       <h1 className='font-semibold text-lg'>ADD FRIEND</h1>
