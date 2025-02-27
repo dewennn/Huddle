@@ -94,10 +94,8 @@ const Dashboard = () => {
 
           <main className='flex'>
             <section className='w-full'>
-              {/* {section == 'online' || section == 'all' ? <FriendList filter={section}/> : <></>}
-              {section == 'addFriend' ? <AddFriend/> : <></>} */}
-
-              <TextChat />
+              {section == 'online' || section == 'all' ? <FriendList filter={section}/> : <></>}
+              {section == 'addFriend' ? <AddFriend/> : <></>}
             </section>
             
             <section className='w-[500px] border-l border-gray-500 p-5' style={{height: 'calc(-64px + 100vh)'}}>
