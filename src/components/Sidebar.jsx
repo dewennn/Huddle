@@ -1,19 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import InfobarDashboard from './sidebar/dashboardPage/InfobarDashboard'
 import UserNav from './UserNav'
-import FriendChat from './sidebar/dashboardPage/FriendChat'
-import { serverAddress } from '../data'
-import { FetchFriendList } from '../Context/FetchFriendList'
 
-const Sidebar = () => {
-  // FETCH FRIEND LIST
-    const {friends, fetchFriends} = useContext(FetchFriendList)
-
-    // call the fetch function
-    useEffect(() => {
-        fetchFriends()
-      }, [])
-  
+const Sidebar = () => {  
 
   // COMPONENT
   return (
@@ -24,9 +13,7 @@ const Sidebar = () => {
 
       <section className='w-64 h-screen bg-3 relative'>
         <InfobarDashboard/>
-        {
-          friends.map(f => <FriendChat key={f.id} img={f.profilePictureUrl} username={f.username}/>)
-        }
+        
         <UserNav />
       </section>
     </section>

@@ -5,39 +5,41 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../Context/User'
 import AddFriend from '../components/dashboard/AddFriend'
 import FetchFriendListProvider from '../Context/FetchFriendList'
+import FriendList from '../components/dashboard/FriendList'
+import TextChat from './TextChat'
 
 const Dashboard = () => {
-  // Hooks
-  const navigate = useNavigate()
-  const {setUsername} = useContext(UserContext)
+  // MISC HOOKS
+    const navigate = useNavigate()
+    const {setUsername} = useContext(UserContext)
 
-  // Request user data
-  const getUserData = async () => {
-    try {
-      const response = await fetch(serverAddress + '/api/user/me', {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })  
+  // FETCH USER DATA
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(serverAddress + '/api/user/me', {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })  
 
-      if(!response.ok) throw new Error("Failed to fetch user data")
-      
-      const data = await response.json()
-      setUsername(data["username"])
+        if(!response.ok) throw new Error("Failed to fetch user data")
+        
+        const data = await response.json()
+        setUsername(data["username"])
+      }
+      catch (error) {
+        console.error("Error fetching user data: ", error)
+      }
     }
-    catch (error) {
-      console.error("Error fetching user data: ", error)
-    }
-  }
 
-  useEffect(() => {
-    getUserData()
-  }, [])
+    useEffect(() => {
+      fetchUserData()
+    }, [])
 
-  // Navigation
-  const[active, setActive] = useState('online')
+  // HEADER NAVIGATION
+    const[section, setSection] = useState('online')
 
   // COMPONENT
   return (
@@ -54,32 +56,32 @@ const Dashboard = () => {
 
               <button
                 className={`font-semibold px-4 py-2 rounded-lg
-                ${active == 'online' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
-                onClick={() => setActive('online')}
+                ${section == 'online' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
+                onClick={() => setSection('online')}
               >
                 Online
               </button>
 
               <button
                 className={`font-semibold px-4 py-2 rounded-lg
-                ${active == 'all' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
-                onClick={() => setActive('all')}
+                ${section == 'all' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
+                onClick={() => setSection('all')}
               >
                 All
               </button>
 
               <button
                 className={`font-semibold px-4 py-2 rounded-lg
-                ${active == 'pending' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
-                onClick={() => setActive('pending')}
+                ${section == 'pending' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
+                onClick={() => setSection('pending')}
               >
                 Pending
               </button>
 
               <button
                 className={`font-semibold px-4 py-2 rounded-lg
-                ${active == 'addFriend' ? 'text-emerald-400' : 'bg-emerald-700 hover:cursor-pointer'}`}
-                onClick={() => setActive('addFriend')}
+                ${section == 'addFriend' ? 'text-emerald-400' : 'bg-emerald-700 hover:cursor-pointer'}`}
+                onClick={() => setSection('addFriend')}
               >
                 Add Friend
               </button>
@@ -92,7 +94,10 @@ const Dashboard = () => {
 
           <main className='flex'>
             <section className='w-full'>
-              {active == 'addFriend' ? <AddFriend/> : <></>}
+              {/* {section == 'online' || section == 'all' ? <FriendList filter={section}/> : <></>}
+              {section == 'addFriend' ? <AddFriend/> : <></>} */}
+
+              <TextChat />
             </section>
             
             <section className='w-[500px] border-l border-gray-500 p-5' style={{height: 'calc(-64px + 100vh)'}}>
