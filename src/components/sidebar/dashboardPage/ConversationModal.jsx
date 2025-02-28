@@ -12,9 +12,7 @@ const ConversationModal = ({ref}) => {
   })
 
   const handleClose = (event) => {
-    if (event.target === modal.current) {
-      modal.current.close()
-    }
+    if (event.target === modal.current) modal.current.close()
   };
 
   return (

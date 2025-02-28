@@ -1,7 +1,10 @@
 import React, { useImperativeHandle, useRef, useState } from 'react'
+import RemoveFriendModal from './RemoveFriendModal'
 
-const FriendListProfileMoreModal = ({ref}) => {
+const FriendListProfileMoreModal = ({ref, displayName}) => {
   const[open, setOpen] = useState(false)
+
+  const removeFriendRef = useRef()
 
   useImperativeHandle(ref, () => {
     return{
@@ -15,15 +18,21 @@ const FriendListProfileMoreModal = ({ref}) => {
     <>
     <div className={`absolute w-52 bg-3 flex flex-col p-2 rounded-lg right-[-220px] top-0 z-40
       ${open ? 'block' : 'hidden'}`}>
-      <button className='w-full p-2 hover:bg-[#3c4046] hover:cursor-pointer rounded-lg text-start text-sm font-semibold'>
+      <button className='w-full p-2 hover:bg-amber-700 hover:cursor-pointer rounded-md text-start text-sm font-semibold'>
         Start Voice Call
       </button>
 
-      <button className='w-full p-2 hover:bg-[#3c4046] hover:cursor-pointer rounded-lg text-start text-sm font-semibold'>
+      <button className='w-full p-2 hover:bg-amber-700 hover:cursor-pointer rounded-md text-start text-sm font-semibold'>
         Start Video Call
       </button>
 
-      <button className='w-full p-2 text-red-400 hover:bg-[#df4b4b] hover:text-white hover:cursor-pointer rounded-lg text-start text-sm font-semibold'>
+      <button
+        onClick={() => {
+          removeFriendRef.current.open()
+          setOpen(false)
+        }}
+        className='w-full p-2 text-red-400 hover:bg-[#df4b4b] hover:text-white hover:cursor-pointer rounded-md text-start text-sm font-semibold'
+      >
         Remove Friend
       </button>
     </div>
@@ -32,6 +41,8 @@ const FriendListProfileMoreModal = ({ref}) => {
       ${open ? 'block' : 'hidden'} hover:cursor-default`}
       onClick={() => setOpen(false)}>
     </div>
+
+    <RemoveFriendModal ref={removeFriendRef} friendName={displayName}/>
     </>
   )
 }

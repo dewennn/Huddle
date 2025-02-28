@@ -10,7 +10,9 @@ const FriendList = ({filter = 'ALL'}) => {
   return (
     <section className='px-5 py-5'>
       <div className='px-3 py-5'>
-        <h1 className='font-semibold text-sm'>{filter.toUpperCase()} -- {friends.length}</h1>
+        <h1 className='font-semibold text-sm'>
+          {filter.toUpperCase() == 'ALL' ? 'ALL FRIENDS' : filter.toUpperCase()} -- {friends.length}
+        </h1>
       </div>
 
       <div>

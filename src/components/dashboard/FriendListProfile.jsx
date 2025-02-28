@@ -71,7 +71,7 @@ const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', 
               >
                 <img className='invert' src="icon/icon_more.png" alt="" />
               </button>
-              <FriendListProfileMoreModal ref={moreRef}/>
+              <FriendListProfileMoreModal ref={moreRef} displayName={displayName}/>
             </div>
           </div>
       </div>
