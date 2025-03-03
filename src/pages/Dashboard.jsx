@@ -22,82 +22,46 @@ const DashboardHeaderButton = ({section, title, activeStyle, hoverStyle, onClick
 const Dashboard = () => {
   // MISC HOOKS
     const navigate = useNavigate()
-    const {setUsername} = useContext(UserContext)
-
-  // FETCH USER DATA
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(serverAddress + '/api/user/me', {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })  
-
-        if(!response.ok) throw new Error("Failed to fetch user data")
-        
-        const data = await response.json()
-        setUsername(data["username"])
-      }
-      catch (error) {
-        console.error("Error fetching user data: ", error)
-      }
-    }
-
-    useEffect(() => {
-      fetchUserData()
-    }, [])
 
   // HEADER NAVIGATION
     const[section, setSection] = useState('online')
 
   // COMPONENT
   return (
-    <FriendRequestsContextProvider>
-    <FetchFriendListProvider>
+    <div className="w-full bg-2">
+      <header>
+        {/* LEFT */}
+          <div className='flex items-center gap-4 p-2 shadow-lg border-black h-14 text-sm'>
+            <h1 className='font-semibold px-6'>Friends</h1>
+            <div className='h-5 w-[1px] mr-6 bg-gray-400'></div>
 
-      <div className="flex manrope text-gray-200">
-        <Sidebar />
+            <DashboardHeaderButton title={'Online'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('online')} section={section} filter={'online'}/>
 
-        <div className="w-full bg-2">
-          <header>
-            {/* LEFT */}
-              <div className='flex items-center gap-4 p-2 shadow-lg border-black h-14 text-sm'>
-                <h1 className='font-semibold px-6'>Friends</h1>
-                <div className='h-5 w-[1px] mr-6 bg-gray-400'></div>
+            <DashboardHeaderButton title={'All'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('all')} section={section} filter={'all'}/>
 
-                <DashboardHeaderButton title={'Online'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('online')} section={section} filter={'online'}/>
+            <DashboardHeaderButton title={'Pending'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('pending')} section={section} filter={'pending'}/>
 
-                <DashboardHeaderButton title={'All'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('all')} section={section} filter={'all'}/>
+            <DashboardHeaderButton title={'Add Friend'} activeStyle={'text-emerald-400 bg-transparent'} hoverStyle={''} onClickFunc={() => setSection('addFriend')} section={section} filter={'addFriend'} defaultStyle='bg-emerald-700'/>                
+          </div>
 
-                <DashboardHeaderButton title={'Pending'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('pending')} section={section} filter={'pending'}/>
-
-                <DashboardHeaderButton title={'Add Friend'} activeStyle={'text-emerald-400 bg-transparent'} hoverStyle={''} onClickFunc={() => setSection('addFriend')} section={section} filter={'addFriend'} defaultStyle='bg-emerald-700'/>                
-              </div>
-
-            {/* RIGHT */}
-              <div>
-                
-              </div>
-          </header>
-
-          <main className='flex'>
-            <section className='w-full'>
-              {section == 'online' || section == 'all' ? <FriendList filter={section}/> : <></>}
-              {section == 'pending' ? <FriendRequests/> : <></>}
-              {section == 'addFriend' ? <AddFriend/> : <></>}
-            </section>
+        {/* RIGHT */}
+          <div>
             
-            <section className='w-[500px] border-l border-gray-500 p-5' style={{height: 'calc(-64px + 100vh)'}}>
-              <h1 className='font-semibold text-lg'>Active Now</h1>
-            </section>
-          </main>
-        </div>
-      </div>
-      
-    </FetchFriendListProvider>
-    </FriendRequestsContextProvider>
+          </div>
+      </header>
+
+      <main className='flex'>
+        <section className='w-full'>
+          {section == 'online' || section == 'all' ? <FriendList filter={section}/> : <></>}
+          {section == 'pending' ? <FriendRequests/> : <></>}
+          {section == 'addFriend' ? <AddFriend/> : <></>}
+        </section>
+        
+        <section className='w-[500px] border-l border-gray-500 p-5' style={{height: 'calc(-64px + 100vh)'}}>
+          <h1 className='font-semibold text-lg'>Active Now</h1>
+        </section>
+      </main>
+    </div>
   )
 }
 

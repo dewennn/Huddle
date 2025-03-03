@@ -39,7 +39,7 @@ const Login = () => {
   const handleSubmitWrapper = async () => {
     try{
       await handleSubmit()
-      navigate('/dashboard')
+      navigate('/')
     } catch(error){
       console.error("Login failed:", error)
       navigate('/login') // Stay on register page if failed

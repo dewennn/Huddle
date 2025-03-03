@@ -39,7 +39,7 @@ const Register = () => {
     
     try {
       await handleSubmit() // Wait for the API call to finish
-      navigate('/dashboard') // Navigate to the dashboard after successful registration
+      navigate('/') // Navigate to the dashboard after successful registration
     } catch (error) {
       console.error("Registration failed:", error)
       navigate('/register') // Stay on register page if failed

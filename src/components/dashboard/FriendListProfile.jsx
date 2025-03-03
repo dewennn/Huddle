@@ -1,7 +1,10 @@
 import React, { useRef, useState } from 'react'
 import FriendListProfileMoreModal from './FriendListProfileMoreModal'
+import { useNavigate } from 'react-router-dom'
 
-const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', displayName, username, status}) => {
+const FriendListProfile = ({friendId, profilePicture = 'default_profile_picture.png', displayName, username, status}) => {
+  const navigate = useNavigate()
+  
   // HANDLE PROPS
     if(profilePicture == null) profilePicture = 'default_profile_picture.png'
     if(status == null) status = 'Offline'
@@ -32,9 +35,10 @@ const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', 
         className='flex items-center p-3 hover:border-0 hover:rounded-lg hover:cursor-pointer hover:bg-[#40444a] hover:absolute hover:left-0 hover:right-0 hover:pb-[15px] hover:z-10 justify-between'
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => navigate('/chat/' + friendId)}
       >
         {/* USER */}
-          <div className='flex gap-4 items-center'>
+          <div className='flex gap-3 items-center'>
             {/* PROFILE PICTURE */}
               <div className='w-9 h-9 rounded-full'><img className='w-full h-full rounded-full object-cover' src={profilePicture} alt="Profile Picture" /></div>
 
@@ -58,6 +62,7 @@ const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', 
                     onMouseEnter={() => msgBtn.current.className = msgBtnClass}
                     onMouseLeave={() => msgBtn.current.className =  hiddenMsgBtn}
                     className={`w-10 h-10 p-3 rounded-full bg-3 ${hover ? 'bg-4' : ''} hover:cursor-pointer`}
+                    onClick={() => navigate('/chat/' + friendId)}
                   >
                     <img className='invert' src="icon/icon_message.png" alt="" />
                   </button>
@@ -74,7 +79,7 @@ const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', 
                 >
                   <img className='invert' src="icon/icon_more.png" alt="" />
                 </button>
-                <FriendListProfileMoreModal ref={moreRef} displayName={displayName} friendId={id}/>
+                <FriendListProfileMoreModal ref={moreRef} displayName={displayName} friendId={friendId}/>
               </div>
 
           </div>
