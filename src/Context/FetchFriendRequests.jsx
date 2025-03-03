@@ -2,13 +2,18 @@ import { createContext, useState } from "react"
 import { serverAddress } from "../data"
 
 export const FetchFriendRequests = createContext({
-  friendRequests: [],
+  sentFriendRequests: [],
   setFriendRequests: () => {},
-  fetchSentFriendRequest: () => {}
+  receivedFriendRequests: [],
+  setReceivedFriendRequests: () => {},
+
+  fetchSentFriendRequest: () => {},
+  fetchReceivedFriendRequest: () => {}
 })
 
 export default function FetchFriendRequestProvider({children}){
-  const[friendRequests, setFriendRequests] = useState([])
+  const[sentFriendRequests, setSentFriendRequests] = useState([])
+  const[receivedFriendRequests, setReceivedFriendRequests] = useState([])
 
   const fetchSentFriendRequest = async () => {
     try {
@@ -17,15 +22,39 @@ export default function FetchFriendRequestProvider({children}){
         credentials: 'include'
       })
 
-      if(!response.ok) throw new Error("Failed to fetch user friends")
+      if(!response.ok) throw new Error("Failed to fetch user sent friend requests")
 
       const data = await response.json()
       
-      setFriendRequests(data)
+      setSentFriendRequests(data)
     } catch (error) {
       console.log(error)
     }
   }
 
-  return <FetchFriendRequests.Provider value={{friendRequests, setFriendRequests, fetchSentFriendRequest}}>{children}</FetchFriendRequests.Provider>
+  const fetchReceivedFriendRequest = async () => {
+    try {
+      const response = await fetch(serverAddress + '/api/user/received_friend_requests', {
+        method: 'GET',
+        credentials: 'include'
+      })
+
+      if(!response.ok) throw new Error("Failed to fetch user friends received friend requests")
+
+      const data = await response.json()
+      
+      setReceivedFriendRequests(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return <FetchFriendRequests.Provider value={
+    { sentFriendRequests,
+      setSentFriendRequests,
+      receivedFriendRequests,
+      setReceivedFriendRequests,
+      fetchSentFriendRequest,
+      fetchReceivedFriendRequest
+    }}>{children}</FetchFriendRequests.Provider>
 }

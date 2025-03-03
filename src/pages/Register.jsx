@@ -9,7 +9,7 @@ const Register = () => {
     email: "",
     displayName: "",
     username: "",
-    password: "",
+    passwordHashed: "",
     dateOfBirth: "",
   })
 
@@ -29,8 +29,6 @@ const Register = () => {
       })
 
       if (!response.ok) throw new Error("Registration failed")
-
-      const data = await response.json()
     } catch (error) {
       throw error
     }
