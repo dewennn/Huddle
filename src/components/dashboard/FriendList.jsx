@@ -25,7 +25,7 @@ const FriendList = ({filter = 'ALL'}) => {
       {/* MAP FRIEND LIST */}
         <div>
           {filter === 'online' ?
-            friends.map(f => f.onlineStatus == 'online' ?
+            friends.filter(f => f.onlineStatus == 'online').map( f =>
               <FriendListProfile
                 key={f.id}
                 id={f.id}
@@ -33,7 +33,7 @@ const FriendList = ({filter = 'ALL'}) => {
                 username={f.username}
                 profilePicture={f.profilePictureUrl}
                 status={f.userStatus}
-              /> : <></>
+              />
             )
             :
             friends.map(f =>

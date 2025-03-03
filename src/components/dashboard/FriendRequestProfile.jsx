@@ -20,8 +20,8 @@ const FriendRequestProfile = (
       })
 
 
-      fetchSentFriendRequest
-      fetchReceivedFriendRequest
+      fetchSentFriendRequest()
+      fetchReceivedFriendRequest()
     } catch (error) {
       throw error
     }
@@ -38,8 +38,8 @@ const FriendRequestProfile = (
         credentials: 'include'
       })
 
-      fetchSentFriendRequest
-      fetchReceivedFriendRequest
+      fetchSentFriendRequest()
+      fetchReceivedFriendRequest()
     } catch (error) {
       throw error
     }

@@ -4,7 +4,7 @@ import { FetchFriendList } from '../../Context/FriendListContext'
 
 const RemoveFriendModal = ({ref, friendName, friendId}) => {
   const modal = useRef()
-  const {friends, setFriends} = useContext(FetchFriendList)
+  const {setFriends} = useContext(FetchFriendList)
 
   useImperativeHandle(ref, () => {
     return{
@@ -14,9 +14,11 @@ const RemoveFriendModal = ({ref, friendName, friendId}) => {
     }
   })
 
-  console.log(friendId)
-
   const deleteFriend = async () => {
+    console.log(JSON.stringify({
+      'friendId': friendId
+    }))
+
     const response = await fetch(serverAddress + '/api/user/remove_friend', {
       method: 'DELETE',
       headers: {
@@ -27,8 +29,6 @@ const RemoveFriendModal = ({ref, friendName, friendId}) => {
       }),
       credentials: 'include'
     })
-
-    console.log(response)
 
     if(response.ok === true){
       modal.current.close()

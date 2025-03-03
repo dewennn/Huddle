@@ -136,9 +136,9 @@ const Register = () => {
             <label htmlFor="password">Password</label>
               <input
                 id="password"
-                name="password"
+                name="passwordHashed"
                 type="password"
-                value={formData.password}
+                value={formData.passwordHashed}
                 onChange={handleChange}
                 className="bg-[#16181b] p-2 rounded-md text-white focus:outline-none opacity-70 w-full"
                 required
