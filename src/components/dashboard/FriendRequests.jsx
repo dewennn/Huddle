@@ -11,7 +11,7 @@ const FriendRequests = () => {
   }, [])
 
   return (
-    <section className='p-5'>
+    <section className='p-3'>
       <div>
         {
           sentFriendRequests.length > 0 ?

@@ -6,7 +6,7 @@ const ConversationDashboard = () => {
 
   return (
     <>
-      <div className='flex justify-center px-3 py-4 shadow-lg border-black h-16'>
+      <div className='flex justify-center px-3 py-3 shadow-lg border-black h-14'>
         <button
           onClick={() => {conversationModal.current.open()}}
           className='bg-4 w-full text-start text-sm px-2 py-1 hover:cursor-pointer font-semibold rounded-md'

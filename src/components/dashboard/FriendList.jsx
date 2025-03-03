@@ -10,7 +10,7 @@ const FriendList = ({filter = 'ALL'}) => {
   return (
     <section className='p-5'>
       {/* ONLINE / ALL - NUMBER OF FRIEND SECTION */}
-        <div className='px-3 py-5'>
+        <div className='p-3'>
           <h1 className='font-semibold text-sm'>
             {filter.toUpperCase() == 'ALL' ? 'ALL FRIENDS' : filter.toUpperCase()} -- {' '}
             {

@@ -9,6 +9,16 @@ import FriendRequests from '../components/dashboard/FriendRequests'
 import FetchFriendListProvider from '../Context/FriendListContext'
 import FriendRequestsContextProvider from '../Context/FriendRequestsContext'
 
+const DashboardHeaderButton = ({section, title, activeStyle, hoverStyle, onClickFunc, filter, defaultStyle = ''}) => {
+  return  <button
+    className={`font-semibold px-2 py-1 rounded-sm
+    ${section == filter ? activeStyle : 'hover:cursor-pointer ' + hoverStyle} ${defaultStyle}`}
+    onClick={onClickFunc}
+  >
+    {title}
+  </button>
+}
+
 const Dashboard = () => {
   // MISC HOOKS
     const navigate = useNavigate()
@@ -49,49 +59,27 @@ const Dashboard = () => {
 
       <div className="flex manrope text-gray-200">
         <Sidebar />
+
         <div className="w-full bg-2">
           <header>
-            {/* Left */} <div className='flex items-center gap-4 p-4 shadow-lg border-black h-16'>
-              <h1 className='font-semibold px-4'>Friends</h1>
+            {/* LEFT */}
+              <div className='flex items-center gap-4 p-2 shadow-lg border-black h-14 text-sm'>
+                <h1 className='font-semibold px-6'>Friends</h1>
+                <div className='h-5 w-[1px] mr-6 bg-gray-400'></div>
 
-              <div className='h-5 w-[1px] bg-gray-400'></div>
+                <DashboardHeaderButton title={'Online'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('online')} section={section} filter={'online'}/>
 
-              <button
-                className={`font-semibold px-4 py-2 rounded-lg
-                ${section == 'online' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
-                onClick={() => setSection('online')}
-              >
-                Online
-              </button>
+                <DashboardHeaderButton title={'All'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('all')} section={section} filter={'all'}/>
 
-              <button
-                className={`font-semibold px-4 py-2 rounded-lg
-                ${section == 'all' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
-                onClick={() => setSection('all')}
-              >
-                All
-              </button>
+                <DashboardHeaderButton title={'Pending'} activeStyle={'bg-[#424549]'} hoverStyle={'hover:bg-[#424549]'} onClickFunc={() => setSection('pending')} section={section} filter={'pending'}/>
 
-              <button
-                className={`font-semibold px-4 py-2 rounded-lg
-                ${section == 'pending' ? 'bg-[#5a5e63]' : 'hover:cursor-pointer hover:bg-[#424549]'}`}
-                onClick={() => setSection('pending')}
-              >
-                Pending
-              </button>
+                <DashboardHeaderButton title={'Add Friend'} activeStyle={'text-emerald-400 bg-transparent'} hoverStyle={''} onClickFunc={() => setSection('addFriend')} section={section} filter={'addFriend'} defaultStyle='bg-emerald-700'/>                
+              </div>
 
-              <button
-                className={`font-semibold px-4 py-2 rounded-lg
-                ${section == 'addFriend' ? 'text-emerald-400' : 'bg-emerald-700 hover:cursor-pointer'}`}
-                onClick={() => setSection('addFriend')}
-              >
-                Add Friend
-              </button>
-            </div>
-
-            {/* Right */} <div>
-              
-            </div>
+            {/* RIGHT */}
+              <div>
+                
+              </div>
           </header>
 
           <main className='flex'>
