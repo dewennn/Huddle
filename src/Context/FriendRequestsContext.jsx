@@ -1,17 +1,19 @@
 import { createContext, useState } from "react"
 import { serverAddress } from "../data"
 
-export const FetchFriendRequests = createContext({
+export const FriendRequestsContext = createContext({
   sentFriendRequests: [],
   setFriendRequests: () => {},
   receivedFriendRequests: [],
   setReceivedFriendRequests: () => {},
 
   fetchSentFriendRequest: () => {},
-  fetchReceivedFriendRequest: () => {}
+  fetchReceivedFriendRequest: () => {},
+  deleteFriendRequest: () => {},
+  postFriendRequest: () => {}
 })
 
-export default function FetchFriendRequestProvider({children}){
+export default function FriendRequestsContextProvider({children}){
   const[sentFriendRequests, setSentFriendRequests] = useState([])
   const[receivedFriendRequests, setReceivedFriendRequests] = useState([])
 
@@ -49,12 +51,12 @@ export default function FetchFriendRequestProvider({children}){
     }
   }
 
-  return <FetchFriendRequests.Provider value={
+  return <FriendRequestsContext.Provider value={
     { sentFriendRequests,
       setSentFriendRequests,
       receivedFriendRequests,
       setReceivedFriendRequests,
       fetchSentFriendRequest,
       fetchReceivedFriendRequest
-    }}>{children}</FetchFriendRequests.Provider>
+    }}>{children}</FriendRequestsContext.Provider>
 }

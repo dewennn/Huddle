@@ -1,14 +1,13 @@
-import React, { act, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import { serverAddress } from '../data'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../Context/User'
 import AddFriend from '../components/dashboard/AddFriend'
-import FetchFriendListProvider from '../Context/FetchFriendList'
 import FriendList from '../components/dashboard/FriendList'
-import TextChat from './TextChat'
 import FriendRequests from '../components/dashboard/FriendRequests'
-import FetchFriendRequestProvider from '../Context/FetchFriendRequests'
+import FetchFriendListProvider from '../Context/FriendListContext'
+import FriendRequestsContextProvider from '../Context/FriendRequestsContext'
 
 const Dashboard = () => {
   // MISC HOOKS
@@ -45,7 +44,7 @@ const Dashboard = () => {
 
   // COMPONENT
   return (
-    <FetchFriendRequestProvider>
+    <FriendRequestsContextProvider>
     <FetchFriendListProvider>
 
       <div className="flex manrope text-gray-200">
@@ -110,7 +109,7 @@ const Dashboard = () => {
       </div>
       
     </FetchFriendListProvider>
-    </FetchFriendRequestProvider>
+    </FriendRequestsContextProvider>
   )
 }
 

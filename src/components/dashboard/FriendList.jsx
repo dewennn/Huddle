@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { FetchFriendList } from '../../Context/FetchFriendList'
+import { FetchFriendList } from '../../Context/FriendListContext'
 import FriendListProfile from './FriendListProfile'
 
 const FriendList = ({filter = 'ALL'}) => {

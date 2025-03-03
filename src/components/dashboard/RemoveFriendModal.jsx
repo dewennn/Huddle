@@ -1,6 +1,6 @@
 import React, { useContext, useImperativeHandle, useRef } from 'react'
 import { serverAddress } from '../../data'
-import { FetchFriendList } from '../../Context/FetchFriendList'
+import { FetchFriendList } from '../../Context/FriendListContext'
 
 const RemoveFriendModal = ({ref, friendName, friendId}) => {
   const modal = useRef()

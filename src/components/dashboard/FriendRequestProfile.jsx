@@ -1,8 +1,50 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
+import { FriendRequestsContext } from '../../Context/FriendRequestsContext'
+import { serverAddress } from '../../data'
 
 const FriendRequestProfile = (
   {id, profilePicture = 'default_profile_picture.png', displayName, username, status, receiver}
 ) => {
+  const{fetchSentFriendRequest, fetchReceivedFriendRequest} = useContext(FriendRequestsContext)
+
+  // REQUESTs
+  const deleteFriendRequest = async () => {
+    try{
+      await fetch(serverAddress + '/api/user/reject_friend_request', {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({friendId : id, receiver : receiver ? '1' : '0'}),
+        credentials: 'include'
+      })
+
+
+      fetchSentFriendRequest
+      fetchReceivedFriendRequest
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const postFriendRequest = async () => {
+    try{
+      await fetch(serverAddress + '/api/user/accept_friend_request', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({friendId : id, receiver : receiver ? '1' : '0'}),
+        credentials: 'include'
+      })
+
+      fetchSentFriendRequest
+      fetchReceivedFriendRequest
+    } catch (error) {
+      throw error
+    }
+  }
+  
 
   // HANDLE NULL PROFILE PIC
     if(profilePicture == null) profilePicture = 'default_profile_picture.png'
@@ -57,6 +99,7 @@ const FriendRequestProfile = (
                 onMouseEnter={() => setCancelHint(cancelHintClass)}
                 onMouseLeave={() => setCancelHint(hiddenCancelHint)}
                 className={`w-10 h-10 p-3 rounded-full bg-3 ${hover ? 'bg-4' : ''} hover:cursor-pointer`}
+                onClick={deleteFriendRequest}
               >
                 <img className='invert w-full' src="icon/icon_close.png" alt="" />
               </button>
@@ -69,6 +112,7 @@ const FriendRequestProfile = (
                   onMouseEnter={() => setAcceptHint(acceptHintClass)}
                   onMouseLeave={() => setAcceptHint(hiddenAcceptHint)}
                   className={`w-10 h-10 p-3 rounded-full bg-3 ${hover ? 'bg-4' : ''} hover:cursor-pointer`}
+                  onClick={postFriendRequest}
                 >
                   <img className='invert w-full' src="icon/icon_check.png" alt="" />
                 </button>
