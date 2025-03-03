@@ -1,11 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { serverAddress } from '../../data'
-import { FetchFriendList } from '../../Context/FetchFriendList'
 
 const AddFriend = () => {
   // FORM HANDLER
-    // function to update friend list
-      const {fetchFriends} = useContext(FetchFriendList)
 
     // handle user form value and change
       const[targetUsername, setTargetUsername] = useState('')
@@ -19,7 +16,7 @@ const AddFriend = () => {
     
     // fetch function
       const addFriendHandler = async () => {
-        const data = await fetch(serverAddress + '/api/user/add_friend', {
+        const response = await fetch(serverAddress + '/api/user/send_friend_request', {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
@@ -30,8 +27,11 @@ const AddFriend = () => {
           credentials: "include"
         })
 
-        fetchFriends()
-        setRequestSent(true)
+        if(response['ok'] == true){
+          setRequestSent(true)
+        }
+
+        console.log(response)
       }
 
   // COMPONENT

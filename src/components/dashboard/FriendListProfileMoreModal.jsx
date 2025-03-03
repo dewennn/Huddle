@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef, useState } from 'react'
 import RemoveFriendModal from './RemoveFriendModal'
 
-const FriendListProfileMoreModal = ({ref, displayName}) => {
+const FriendListProfileMoreModal = ({ref, displayName, friendId}) => {
   const[open, setOpen] = useState(false)
 
   const removeFriendRef = useRef()
@@ -42,7 +42,7 @@ const FriendListProfileMoreModal = ({ref, displayName}) => {
       onClick={() => setOpen(false)}>
     </div>
 
-    <RemoveFriendModal ref={removeFriendRef} friendName={displayName}/>
+    <RemoveFriendModal ref={removeFriendRef} friendName={displayName} friendId={friendId}/>
     </>
   )
 }

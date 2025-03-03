@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
-import FriendListProfileMoreModal from './FriendListProfileMoreModal'
 
-const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', displayName, username, status}) => {
+const FriendRequestProfile = ({id, profilePicture = 'default_profile_picture.png', displayName, username, status}) => {
   // HANDLE NULL PROFILE PIC
     if(profilePicture == null) profilePicture = 'default_profile_picture.png'
 
@@ -71,7 +70,6 @@ const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', 
               >
                 <img className='invert' src="icon/icon_more.png" alt="" />
               </button>
-              <FriendListProfileMoreModal ref={moreRef} displayName={displayName} friendId={id}/>
             </div>
           </div>
       </div>
@@ -80,4 +78,4 @@ const FriendListProfile = ({id, profilePicture = 'default_profile_picture.png', 
   )
 }
 
-export default FriendListProfile
+export default FriendRequestProfile

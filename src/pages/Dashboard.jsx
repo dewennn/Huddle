@@ -7,6 +7,8 @@ import AddFriend from '../components/dashboard/AddFriend'
 import FetchFriendListProvider from '../Context/FetchFriendList'
 import FriendList from '../components/dashboard/FriendList'
 import TextChat from './TextChat'
+import FriendRequests from '../components/dashboard/FriendRequests'
+import FetchFriendRequestProvider from '../Context/FetchFriendRequests'
 
 const Dashboard = () => {
   // MISC HOOKS
@@ -43,10 +45,11 @@ const Dashboard = () => {
 
   // COMPONENT
   return (
+    <FetchFriendRequestProvider>
     <FetchFriendListProvider>
+
       <div className="flex manrope text-gray-200">
         <Sidebar />
-        
         <div className="w-full bg-2">
           <header>
             {/* Left */} <div className='flex items-center gap-4 p-4 shadow-lg border-black h-16'>
@@ -95,6 +98,7 @@ const Dashboard = () => {
           <main className='flex'>
             <section className='w-full'>
               {section == 'online' || section == 'all' ? <FriendList filter={section}/> : <></>}
+              {section == 'pending' ? <FriendRequests/> : <></>}
               {section == 'addFriend' ? <AddFriend/> : <></>}
             </section>
             
@@ -104,7 +108,9 @@ const Dashboard = () => {
           </main>
         </div>
       </div>
+      
     </FetchFriendListProvider>
+    </FetchFriendRequestProvider>
   )
 }
 
