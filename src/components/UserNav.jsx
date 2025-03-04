@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../Context/User'
 
 const UserNav = ({profilePicture = '/default_profile_picture.png', status = 'Online'}) => {
-  const {username, fetchUserData} = useContext(UserContext)
 
-  useEffect(fetchUserData, [])
+  const {user, fetchUserData} = useContext(UserContext)
+
+  useEffect(() => fetchUserData, [])
   
   return (
     <section className='absolute bottom-0 left-0 right-0 bg-4 flex items-center p-2'>
@@ -17,7 +18,7 @@ const UserNav = ({profilePicture = '/default_profile_picture.png', status = 'Onl
           
           {/* USERNAME & STATUS */}
           <div>
-            <h1 className='text-[14px] font-semibold'>{username}</h1>
+            <h1 className='text-[14px] font-semibold'>{user.username}</h1>
             <p className='text-[11px] text-gray-300'>{status}</p>
           </div>
         </div>

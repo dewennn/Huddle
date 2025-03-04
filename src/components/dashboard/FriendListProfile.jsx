@@ -35,7 +35,6 @@ const FriendListProfile = ({friendId, profilePicture = 'default_profile_picture.
         className='flex items-center p-3 hover:border-0 hover:rounded-lg hover:cursor-pointer hover:bg-[#40444a] hover:absolute hover:left-0 hover:right-0 hover:pb-[15px] hover:z-10 justify-between'
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onClick={() => navigate('/chat/' + friendId)}
       >
         {/* USER */}
           <div className='flex gap-3 items-center'>

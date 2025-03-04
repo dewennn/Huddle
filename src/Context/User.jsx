@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { serverAddress } from "../data";
 
 export const UserContext = createContext({
   username: '',
@@ -7,7 +8,7 @@ export const UserContext = createContext({
 })
 
 export default function UserContextProvider({children}){
-  const[username, setUsername] = useState("")
+  const[user, setUser] = useState({})
 
   const fetchUserData = async () => {
     try {
@@ -22,12 +23,12 @@ export default function UserContextProvider({children}){
       if(!response.ok) throw new Error("Failed to fetch user data")
       
       const data = await response.json()
-      setUsername(data["username"])
+      setUser(data)
     }
     catch (error) {
       console.error("Error fetching user data: ", error)
     }
   }
 
-  return <UserContext.Provider value={{username, setUsername, fetchUserData}}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{user, setUser, fetchUserData}}>{children}</UserContext.Provider>
 }

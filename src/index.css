@@ -39,3 +39,19 @@
 .space-mono {
   font-family: "Space Mono", serif;
 }
+
+/* Works for WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px; /* Vertical scrollbar width */
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-track {
+  background: #282b30; /* Track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2124; /* Scroll thumb color */
+  border-radius: 10px;
+}
